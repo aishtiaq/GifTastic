@@ -56,6 +56,7 @@ $(document).ready(function() {
            
             for (var i=0; i< 10; i++) {
                 var myDiv = $("<div class='float-left'>");
+                var imageDiv =$("<div>");
                 var image = $("<img>");
                 var url=response.data[i].images.fixed_height_still.url;
                 
@@ -70,14 +71,15 @@ $(document).ready(function() {
                 image.attr("data-state","still");
                 image.addClass("image-fluid px-1 gif");
                 
-                myDiv.append(image);
+                imageDiv.append(image);
+                myDiv.append(imageDiv);
 
                 var favButton = $("<p class='mt-1 mx-1'>");
                 favButton.html('<i class="fas fa-star float-left"></i>');
                 myDiv.append(favButton);
 
                 var dlHTML= "<a href='"+response.data[i].images.original_mp4.mp4+"' target='_blank' download><i class='float-right fas fa-download'></i></a>";
-                console.log(dlHTML);
+                
                 favButton.append(dlHTML);
                 myDiv.append(favButton);
 
@@ -94,7 +96,7 @@ $(document).ready(function() {
     $(document).on("click",".gif", function() {
         console.log ("I am here");
         var state = $(this).attr("data-state");
-        console.log("state is "+state);
+        
         if(state==="still") {
             var animate = $(this).attr("data-animate");
             $(this).attr("src",animate);
@@ -107,8 +109,9 @@ $(document).ready(function() {
 
     });
     
-    $(document).on("click",".fa-download", function() {
-    
+    $(document).on("click",".fa-star", function() {
+        
+        $("#fav").append($("<div>").html($(this).parent().prev().html()));
     });
   
 });
