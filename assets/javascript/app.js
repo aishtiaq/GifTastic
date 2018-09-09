@@ -47,11 +47,11 @@ $(document).ready(function() {
         
         if(btnPrev===btnCurr) {
             offset=offset+10;
-            queryURL = "http://api.giphy.com/v1/gifs/search?q="+btnCurr.replace(/\s+/g, '+')+"&api_key=dc6zaTOxFJmzC&limit=10&offset="+offset;
+            queryURL = "https://api.giphy.com/v1/gifs/search?q="+btnCurr.replace(/\s+/g, '+')+"&api_key=dc6zaTOxFJmzC&limit=10&offset="+offset;
             
          }
         else {
-            queryURL = "http://api.giphy.com/v1/gifs/search?q="+btnCurr.replace(/\s+/g, '+')+"&api_key=dc6zaTOxFJmzC&limit=10";
+            queryURL = "https://api.giphy.com/v1/gifs/search?q="+btnCurr.replace(/\s+/g, '+')+"&api_key=dc6zaTOxFJmzC&limit=10";
             $("#results").empty();
         }
         $.ajax({
