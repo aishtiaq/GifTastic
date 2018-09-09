@@ -17,6 +17,10 @@ function init() {
 
 
 $(document).ready(function() {
+    //get items from local storage
+    if(localStorage.getItem('links')){
+        $("#fav").html(localStorage.getItem('links'));
+    }
 
     var btnPrev='';
     var btnCurr='';
@@ -38,6 +42,7 @@ $(document).ready(function() {
             button.attr("id", $("#newBtn").val().replace(/\s+/g, '+'));
             $("#buttons").append(button);
             btnCurr=$("#newBtn").val();
+            $("#newBtn").val("");
         }
         
         if(btnPrev===btnCurr) {
@@ -60,7 +65,12 @@ $(document).ready(function() {
                 var image = $("<img>");
                 var url=response.data[i].images.fixed_height_still.url;
                 
-                var p = $('<p class="px-1 mt-3">');
+                var title = $('<p class="px-2 mb-0 mt-4">');
+                title.html("<b>Title</b>: "+response.data[i].title);
+
+                myDiv.append(title);
+
+                var p = $('<p class="px-2 my-0">');
                 p.html("<b>Rating</b>: "+response.data[i].rating);
 
                 myDiv.append(p);
@@ -69,7 +79,7 @@ $(document).ready(function() {
                 image.attr("data-still",url);
                 image.attr("data-animate",response.data[i].images.fixed_height.url);
                 image.attr("data-state","still");
-                image.addClass("image-fluid px-1 gif");
+                image.addClass("image-fluid px-2 gif");
                 
                 imageDiv.append(image);
                 myDiv.append(imageDiv);
@@ -112,6 +122,7 @@ $(document).ready(function() {
     $(document).on("click",".fa-star", function() {
         
         $("#fav").append($("<div>").html($(this).parent().prev().html()));
+        localStorage.setItem('links',$("#fav").html());
     });
   
 });
